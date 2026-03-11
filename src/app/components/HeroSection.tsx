@@ -76,7 +76,7 @@ export function HeroSection() {
           <span className="hidden sm:inline">
             YP Club is a private, application-only members club in Dubai for
             founders scaling from AED 1M to AED 30M. Over $12M in deals
-            facilitated. 48+ private events yearly. Powered by PioneerOS — the
+            facilitated. 48+ private events yearly. Powered by PioneerOS, the
             infrastructure, network, and knowledge to scale your business and
             get in the rooms that change your trajectory.
           </span>

@@ -7,7 +7,7 @@ export default function NotFoundPage() {
   return (
     <div className="min-h-screen bg-[#1a1414] text-[#fcfcfc] overflow-x-hidden">
       <SEOHead
-        title="Page Not Found — YP Club"
+        title="Page Not Found | YP Club"
         description="The page you are looking for does not exist. Return to YP Club, Dubai's private members club for founders."
       />
       <SubPageNav />

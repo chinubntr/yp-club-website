@@ -17,8 +17,8 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-[#1a1414] text-[#fcfcfc] overflow-x-hidden">
       <SEOHead
-        title="About YP Club — Dubai's Private Founder Network | Founded 2022"
-        description="YP Club is a private, application-only members club in Dubai for founders scaling from AED 1M to AED 30M. 190 members, 1-in-5 approved, powered by PioneerOS. Founded in 2022."
+        title="About YP Club | Dubai's Private Founder Network | Founded 2022"
+        description="YP Club is a private, application-only members club in Dubai for founders scaling from AED 1M to AED 30M. 1-in-5 approved, powered by PioneerOS. Founded in 2022."
         canonical="https://ypclub.com/about"
         jsonLd={[
           breadcrumbSchema([
@@ -34,7 +34,7 @@ export default function AboutPage() {
         style={{ WebkitBackdropFilter: "blur(40px) saturate(200%)", backdropFilter: "blur(40px) saturate(200%)" }}
         aria-label="About page navigation"
       >
-        <Link to="/" className="block hover:opacity-80 transition-opacity outline-none focus-visible:ring-1 focus-visible:ring-[#A08567] rounded-sm" aria-label="YP Club — back to homepage">
+        <Link to="/" className="block hover:opacity-80 transition-opacity outline-none focus-visible:ring-1 focus-visible:ring-[#A08567] rounded-sm" aria-label="YP Club, back to homepage">
           <div className="relative h-[14px] w-[94px] md:h-[18px] md:w-[120px]">
             <svg
               className="absolute block size-full"
@@ -98,12 +98,12 @@ export default function AboutPage() {
       <section className="py-16 md:py-24 px-6" aria-labelledby="about-content-heading">
         <div className="max-w-[720px] mx-auto lg:ml-[max(calc(50%-360px),16%)]">
           <ScrollReveal direction="up">
-            <h2 id="about-content-heading" className="sr-only">About YP Club — Dubai's Private Founder Network</h2>
+            <h2 id="about-content-heading" className="sr-only">About YP Club, Dubai's Private Founder Network</h2>
             <p className="font-['Inter',sans-serif] font-light text-[15px] md:text-[16px] leading-[28px] text-[#fcfcfc] mb-8">
               YP Club is a private, application-only community of founders
               building and scaling businesses in the UAE. Founded in 2022 and
-              based in Dubai, the club brings together 190 members who are
-              serious about what comes next &mdash; not just what came before.
+              based in Dubai, the club brings together founders who are
+              serious about what comes next, not just what came before.
             </p>
           </ScrollReveal>
           <ScrollReveal direction="up" delay={0.1}>
@@ -120,7 +120,7 @@ export default function AboutPage() {
           <ScrollReveal direction="up" delay={0.12}>
             <div className="bg-[rgba(129,106,84,0.06)] border-l-2 border-[#816a54] pl-6 pr-4 py-4 mb-12">
               <p className="font-['Inter',sans-serif] font-light text-[14px] leading-[24px] text-[#fcfcfc]">
-                YP Club is a private members club in Dubai built exclusively for founders scaling businesses from AED 1M to AED 30M in revenue. Founded in 2022, the club has 190 active members with a 1-in-5 approval rate and operates using its proprietary infrastructure, PioneerOS. Members have raised $5M+ from Andreessen Horowitz, secured multi-six-figure contracts, and expanded internationally through introductions made inside the network.
+                YP Club is a private members club in Dubai built exclusively for founders scaling businesses from AED 1M to AED 30M in revenue. Founded in 2022, the club has a 1-in-5 approval rate and operates using its proprietary infrastructure, PioneerOS. Members have raised $5M+ from Andreessen Horowitz, secured multi-six-figure contracts, and expanded internationally through introductions made inside the network.
               </p>
             </div>
           </ScrollReveal>

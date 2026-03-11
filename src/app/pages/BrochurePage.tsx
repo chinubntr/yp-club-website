@@ -115,8 +115,8 @@ export default function BrochurePage() {
   return (
     <div className="min-h-screen bg-[#1a1414] text-[#fcfcfc] overflow-x-hidden">
       <SEOHead
-        title="Download Brochure — YP Club | Exclusive Founder Network Dubai Membership"
-        description="Get the full YP Club playbook — membership model, PioneerOS platform, member results, and 2026 programming. Dubai's private business club for founders scaling AED 1M–30M."
+        title="Download Brochure | YP Club | Exclusive Founder Network Dubai Membership"
+        description="Get the full YP Club playbook: membership model, PioneerOS platform, member results, and 2026 programming. Dubai's private business club for founders scaling AED 1M-30M."
         canonical="https://ypclub.com/brochure"
         jsonLd={[
           breadcrumbSchema([

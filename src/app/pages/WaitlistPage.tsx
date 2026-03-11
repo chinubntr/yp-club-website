@@ -29,12 +29,6 @@ const processSteps = [
   },
 ];
 
-const stats = [
-  { value: "$12M+", label: "Deals Facilitated" },
-  { value: "48+", label: "Private Events Yearly" },
-  { value: "30+", label: "Industries Represented" },
-];
-
 export default function WaitlistPage() {
   const [videoOpen, setVideoOpen] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -59,8 +53,8 @@ export default function WaitlistPage() {
   return (
     <div className="min-h-screen bg-[#1a1414] text-[#fcfcfc] overflow-x-hidden">
       <SEOHead
-        title="Join the Waitlist — YP Club | Private Business Club Dubai for Founders"
-        description="Apply to join YP Club, Dubai's private members club for founders scaling from AED 1M to AED 30M. 190 members, 1-in-5 approved. Download the app and apply in under five minutes."
+        title="Join the Waitlist | YP Club | Private Business Club Dubai for Founders"
+        description="Apply to join YP Club, Dubai's private members club for founders scaling from AED 1M to AED 30M. 1-in-5 approved. Download the app and apply in under five minutes."
         canonical="https://ypclub.com/waitlist"
         jsonLd={[
           breadcrumbSchema([
@@ -200,29 +194,6 @@ export default function WaitlistPage() {
             />
           </div>
         </ScrollReveal>
-      </section>
-
-      {/* Stats Bar */}
-      <section className="bg-[rgba(252,252,252,0.02)] border-t border-b border-[rgba(255,255,255,0.1)]" aria-label="Membership statistics">
-        <div className="max-w-[900px] mx-auto flex flex-col md:flex-row items-center justify-center py-7 px-6">
-          {stats.map((stat, i) => (
-            <ScrollReveal key={stat.label} direction="up" delay={i * 0.1}>
-              <div className="flex items-center">
-                <div className="flex flex-col items-center px-10 py-3 md:py-0">
-                  <span className="font-['Cormorant_Garamond',serif] font-light text-[32px] leading-[32px] text-[#fcfcfc] text-center block" role="presentation" aria-hidden="true">
-                    {stat.value}
-                  </span>
-                  <p className="font-['Inter',sans-serif] font-medium text-[12px] leading-[18px] tracking-[2px] uppercase text-[#878787] text-center mt-1.5">
-                    {stat.label}
-                  </p>
-                </div>
-                {i < stats.length - 1 && (
-                  <div className="hidden md:block w-px h-8 bg-[rgba(255,255,255,0.1)]" />
-                )}
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
       </section>
 
       {/* Process + App Card */}

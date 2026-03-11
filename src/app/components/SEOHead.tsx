@@ -131,11 +131,6 @@ export const organizationSchema = {
       addressCountry: "AE",
     },
   },
-  numberOfEmployees: {
-    "@type": "QuantitativeValue",
-    value: 190,
-    unitText: "members",
-  },
   sameAs: [
     "https://www.linkedin.com/company/ypclub",
     "https://www.instagram.com/ypclub",

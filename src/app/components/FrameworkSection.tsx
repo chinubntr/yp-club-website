@@ -1,31 +1,30 @@
 import { ScrollReveal, StaggerContainer, StaggerItem } from "./ScrollReveal";
 import { useState } from "react";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
+import influenceImg from "../../assets/framework-influence.jpg";
+import knowledgeImg from "../../assets/framework-knowledge.jpg";
+import wealthImg from "../../assets/framework-wealth.jpg";
 
 const pillars = [
   {
     num: "01",
     title: "Influence",
     desc: "Build the authority and personal brand that opens doors before you walk into them. Scale the reputation that follows your company everywhere it goes.",
-    image:
-      "https://images.unsplash.com/photo-1764874299006-bf4266427ec9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBidXNpbmVzcyUyMGNvbmZlcmVuY2UlMjBzdGFnZSUyMHNwZWFrZXJ8ZW58MXx8fHwxNzczMDQxODk3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    imageAlt: "Speaker at a luxury business conference",
+    image: influenceImg,
+    imageAlt: "Speaker at a YP Club private event",
   },
   {
     num: "02",
     title: "Knowledge",
     desc: "Access the tools, frameworks, and subject matter experts that move you from operator to global executive. Programming designed to sharpen the person running the company.",
-    image:
-      "https://images.unsplash.com/photo-1563400840384-db84615dbe2a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxleGVjdXRpdmUlMjBwcml2YXRlJTIwbGlicmFyeSUyMGRhcmslMjBtb29keXxlbnwxfHx8fDE3NzMwNDE4OTd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    imageAlt: "Executive private library with dark interior",
+    image: knowledgeImg,
+    imageAlt: "YP Club member at a curated dinner event",
   },
   {
     num: "03",
     title: "Wealth",
     desc: "The relationships, deals, and infrastructure to raise capital, build generational wealth, and protect what you are building as it scales.",
-    image:
-      "https://images.unsplash.com/photo-1714773804930-56124267152b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBwcml2YXRlJTIwZGlubmVyJTIwZXZlbnQlMjBlbGVnYW50fGVufDF8fHx8MTc3MzA0MTg5OHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    imageAlt: "Elegant private dinner event setting",
+    image: wealthImg,
+    imageAlt: "YP Club founders networking at a curated dinner",
   },
 ];
 
@@ -42,49 +41,72 @@ function PillarCard({
       onMouseLeave={() => setHovered(false)}
       role="article"
       aria-label={`${pillar.title} pillar`}
-      className="relative bg-[#1a1414] border border-[rgba(255,255,255,0.1)] overflow-hidden p-10 min-h-[308px] cursor-default"
+      className="group relative bg-[#1a1414] border border-[rgba(255,255,255,0.08)] overflow-hidden cursor-default flex flex-col"
     >
-      {/* Hover background image */}
-      <div
-        className="absolute inset-0 pointer-events-none transition-opacity duration-500"
-        style={{ opacity: hovered ? 1 : 0 }}
-      >
-        <ImageWithFallback
+      {/* Image */}
+      <div className="relative w-full aspect-[4/3] overflow-hidden">
+        <img
           src={pillar.image}
           alt={pillar.imageAlt}
           loading="lazy"
-          className="absolute inset-0 size-full object-cover opacity-[0.15]"
+          className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out"
+          style={{ transform: hovered ? "scale(1.05)" : "scale(1)" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1a1414] via-[rgba(26,20,20,0.85)] to-[rgba(26,20,20,0.6)]" />
-      </div>
-
-      {/* Hover border glow */}
-      <div
-        className="absolute inset-0 border border-[rgba(129,106,84,0.3)] pointer-events-none transition-opacity duration-400"
-        style={{ opacity: hovered ? 1 : 0 }}
-      />
-
-      {/* Content */}
-      <div className="relative z-10">
+        {/* Gradient overlay from bottom */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1a1414] via-[rgba(26,20,20,0.3)] to-transparent" />
+        {/* Number overlay */}
         <span
-          className="font-['Cormorant_Garamond',serif] font-light text-[40px] md:text-[48px] leading-[40px] md:leading-[48px] mb-6 block transition-colors duration-400"
-          style={{ color: hovered ? "rgba(160,133,103,1)" : "rgba(160,133,103,0.75)" }}
+          className="absolute bottom-4 left-6 font-['Cormorant_Garamond',serif] font-light text-[48px] leading-none transition-colors duration-500"
+          style={{ color: hovered ? "rgba(160,133,103,1)" : "rgba(160,133,103,0.6)" }}
           aria-hidden="true"
         >
           {pillar.num}
         </span>
+      </div>
+
+      {/* Content area */}
+      <div className="relative px-6 pt-5 pb-6 flex-1 flex flex-col">
+        {/* Hover border glow */}
+        <div
+          className="absolute inset-0 border border-[rgba(160,133,103,0.25)] pointer-events-none transition-opacity duration-500"
+          style={{ opacity: hovered ? 1 : 0 }}
+        />
+
         <h3
-          className="font-['Cormorant_Garamond',serif] font-normal text-[24px] md:text-[28px] leading-[42px] text-[#fcfcfc] mb-4 transition-transform duration-400"
-          style={{ transform: hovered ? "translateX(4px)" : "translateX(0)" }}
+          className="font-['Cormorant_Garamond',serif] font-normal text-[24px] md:text-[28px] leading-[1.3] text-[#fcfcfc] mb-3 transition-all duration-500"
+          style={{ transform: hovered ? "translateY(-2px)" : "translateY(0)" }}
         >
           {pillar.title}
         </h3>
-        <p
-          className="font-['Inter',sans-serif] font-light text-[14px] leading-[24px] text-[#fcfcfc] max-w-[320px] transition-opacity duration-400"
-          style={{ opacity: hovered ? 1 : 0.85 }}
+
+        {/* Body text: hidden by default, elegantly revealed on hover */}
+        <div
+          className="overflow-hidden transition-all duration-600 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+          style={{
+            maxHeight: hovered ? "160px" : "0px",
+            opacity: hovered ? 1 : 0,
+            marginTop: hovered ? "0px" : "-4px",
+          }}
         >
-          {pillar.desc}
-        </p>
+          <p className="font-['Inter',sans-serif] font-light text-[13px] leading-[22px] text-[rgba(252,252,252,0.8)]">
+            {pillar.desc}
+          </p>
+        </div>
+
+        {/* Subtle line accent */}
+        <div
+          className="mt-auto pt-4 transition-all duration-500"
+        >
+          <div
+            className="h-px transition-all duration-600 ease-out"
+            style={{
+              width: hovered ? "100%" : "40px",
+              background: hovered
+                ? "linear-gradient(90deg, #A08567, rgba(160,133,103,0.2))"
+                : "rgba(255,255,255,0.1)",
+            }}
+          />
+        </div>
       </div>
     </div>
   );
@@ -112,7 +134,7 @@ export function FrameworkSection() {
 
         {/* Desktop: grid | Mobile: horizontal scroll */}
         <StaggerContainer
-          className="hidden md:grid md:grid-cols-3 gap-px"
+          className="hidden md:grid md:grid-cols-3 gap-4"
           staggerDelay={0.15}
           once={false}
         >

@@ -33,7 +33,7 @@ export function WhySection() {
                 YP Club is not that. It is Dubai's only private business club built exclusively for founders.
               </p>
               <p className="font-['Inter',sans-serif] font-light text-[14px] leading-[24px] text-[#fcfcfc]">
-                Every dinner is curated to the people you actually need to meet. Every piece of programming is designed to make you a sharper operator. Every introduction is tracked and attributed so you can see — in numbers — exactly what your membership is worth.
+                Every dinner is curated to the people you actually need to meet. Every piece of programming is designed to make you a sharper operator. Every introduction is tracked and attributed so you can see, in numbers, exactly what your membership is worth.
               </p>
               <p className="font-['Inter',sans-serif] font-light text-[14px] leading-[24px] text-[#fcfcfc]">
                 This is not a network. It is a growth operating system for founders scaling from AED 1M to AED 30M.

@@ -85,7 +85,7 @@ export function TestimonialsSection() {
                         {/* Image */}
                         <img
                           src={src}
-                          alt={i === 0 ? `${t.name} — YP Club member` : ""}
+                          alt={i === 0 ? `${t.name}, YP Club member` : ""}
                           className="absolute inset-0 size-full rounded-full object-cover"
                           loading="lazy"
                         />

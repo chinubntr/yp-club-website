@@ -54,7 +54,7 @@ const memberTestimonials = [
   {
     tag: "Multi-six-figure contract",
     story:
-      "Sonny and Nathan Priestley, — $150M+ in total across businesses — inside YP Club. Together they built the first AI solution for real estate project management. One introduction. They're going international.",
+      "Sonny and Nathan Priestley, $150M+ in total across businesses, inside YP Club. Together they built the first AI solution for real estate project management. One introduction. They're going international.",
     quote:
       "The introduction. One product changing an entire industry.",
     name: "Sonny Sangha & Nathan Priestley",
@@ -63,7 +63,7 @@ const memberTestimonials = [
   {
     tag: "International expansion",
     story:
-      "James started as a YP Club team member before backing himself to found Particle Execution. He is a huge advocate. His first contract came through the very network he helped build — now expanding to Asia and Africa globally.",
+      "James started as a YP Club team member before backing himself to found Particle Execution. He is a huge advocate. His first contract came through the very network he helped build, now expanding to Asia and Africa globally.",
     quote:
       "From employee to founder to international contract.",
     name: "James Augustin",
@@ -75,8 +75,8 @@ export default function ReferralPage() {
   return (
     <div className="min-h-screen bg-[#1a1414] text-[#fcfcfc] overflow-x-hidden">
       <SEOHead
-        title="You've Been Referred — YP Club | Exclusive Founder Network Dubai"
-        description="A YP Club member has invited you. Apply with priority review to join Dubai's private members club for founders scaling AED 1M–30M. 190 members, 1-in-5 approved."
+        title="You've Been Referred | YP Club | Exclusive Founder Network Dubai"
+        description="A YP Club member has invited you. Apply with priority review to join Dubai's private members club for founders scaling AED 1M-30M. 1-in-5 approved."
         canonical="https://ypclub.com/referral"
         jsonLd={[
           breadcrumbSchema([

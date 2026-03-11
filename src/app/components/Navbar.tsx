@@ -6,7 +6,7 @@ import { useFocusTrap } from "./useFocusTrap";
 
 function YPClubLogo({ mobile = false }: { mobile?: boolean }) {
   return (
-    <Link to="/" className="block outline-none focus-visible:ring-1 focus-visible:ring-[#A08567] rounded-sm" aria-label="YP Club — back to homepage">
+    <Link to="/" className="block outline-none focus-visible:ring-1 focus-visible:ring-[#A08567] rounded-sm" aria-label="YP Club, back to homepage">
       <div
         className={
           mobile

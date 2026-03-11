@@ -1,6 +1,6 @@
 import { Navbar } from "../components/Navbar";
 import { HeroSection } from "../components/HeroSection";
-import { StatsBar } from "../components/StatsBar";
+
 import { WhySection } from "../components/WhySection";
 import { BuiltForSection } from "../components/BuiltForSection";
 import { FrameworkSection } from "../components/FrameworkSection";
@@ -21,8 +21,8 @@ export default function HomePage() {
   return (
     <>
       <SEOHead
-        title="YP Club — Private Founder Network Dubai | Networking for Founders Scaling AED 1M–30M"
-        description="YP Club is Dubai's private, application-only members club for founders scaling from AED 1M to AED 30M. 190 members, 1-in-5 approved, powered by PioneerOS. The operating system for founders who are serious about what comes next."
+        title="YP Club | Private Founder Network Dubai | Networking for Founders Scaling AED 1M-30M"
+        description="YP Club is Dubai's private, application-only members club for founders scaling from AED 1M to AED 30M. 1-in-5 approved, powered by PioneerOS. The operating system for founders who are serious about what comes next."
         canonical="https://ypclub.com/"
         jsonLd={[organizationSchema, localBusinessSchema, websiteSchema]}
       />
@@ -31,7 +31,6 @@ export default function HomePage() {
       </header>
       <main id="main-content">
         <HeroSection />
-        <StatsBar />
         <WhySection />
         <BuiltForSection />
         <FrameworkSection />

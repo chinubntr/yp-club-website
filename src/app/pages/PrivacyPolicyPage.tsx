@@ -75,7 +75,7 @@ export default function PrivacyPolicyPage() {
   return (
     <div className="min-h-screen bg-[#1a1414] text-[#fcfcfc] overflow-x-hidden">
       <SEOHead
-        title="Privacy Policy — YP Club"
+        title="Privacy Policy | YP Club"
         description="Learn how YP Club collects, uses, and protects your personal information. Your privacy matters to us."
         canonical="https://ypclub.com/privacy"
         jsonLd={[

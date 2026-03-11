@@ -8,7 +8,7 @@ const stats = [
 
 export function StatsBar() {
   return (
-    <section className="bg-[#1a1414] border-t border-b border-[rgba(255,255,255,0.1)]" aria-label="Key statistics — over 12 million in deals facilitated, 48 plus private events yearly, 30 plus industries represented">
+    <section className="bg-[#1a1414] border-t border-b border-[rgba(255,255,255,0.1)]" aria-label="Key statistics: over 12 million in deals facilitated, 48 plus private events yearly, 30 plus industries represented">
       <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-center py-6 md:py-8 px-6">
         {stats.map((stat, i) => (
           <ScrollReveal key={stat.label} direction="up" delay={i * 0.15}>

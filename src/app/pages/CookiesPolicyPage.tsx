@@ -73,7 +73,7 @@ export default function CookiesPolicyPage() {
   return (
     <div className="min-h-screen bg-[#1a1414] text-[#fcfcfc] overflow-x-hidden">
       <SEOHead
-        title="Cookies Policy — YP Club"
+        title="Cookies Policy | YP Club"
         description="Learn how YP Club uses cookies and similar technologies to improve your experience on our platform."
         canonical="https://ypclub.com/cookies"
         jsonLd={[

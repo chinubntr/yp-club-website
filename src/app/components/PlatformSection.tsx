@@ -1,39 +1,35 @@
 import { useEffect, useRef, useState, useCallback } from "react";
+import platformImpactIndex from "../../assets/platform-impact-index.png";
+import platformCuratedDinners from "../../assets/platform-curated-dinners.png";
+import platformTheVault from "../../assets/platform-the-vault.png";
+import platformYpConcierge from "../../assets/platform-yp-concierge.png";
 
 const features = [
   {
     title: "Impact Index",
     desc: "See the financial value your network is generating in real time. Every introduction, referral, and deal tracked and attributed to your profile.",
     color: "#1e4d57",
+    image: platformImpactIndex,
   },
   {
     title: "Curated Dinners",
     desc: "AI-matched gatherings based on your industry, ambitions, and who you need to meet. Seating confirmed two days in advance.",
     color: "#816a54",
+    image: platformCuratedDinners,
   },
   {
     title: "The Vault",
     desc: "On-demand access to a private library of founder-focused education built around the six pillars of scale.",
     color: "#2d4a3e",
+    image: platformTheVault,
   },
   {
     title: "YP Concierge",
     desc: "24/7 travel desk with up to 50% off Emirates and Etihad business class, luxury hotel upgrades, and VIP arrival treatment.",
     color: "#4a3a5c",
+    image: platformYpConcierge,
   },
 ];
-
-// Placeholder images — replace with real ones later
-const placeholderImages = features.map(
-  (f, i) =>
-    `data:image/svg+xml,${encodeURIComponent(
-      `<svg xmlns="http://www.w3.org/2000/svg" width="375" height="812" viewBox="0 0 375 812">
-        <rect width="375" height="812" fill="${f.color}" rx="32"/>
-        <text x="187" y="380" text-anchor="middle" fill="white" font-family="sans-serif" font-size="24" font-weight="300" opacity="0.6">${f.title}</text>
-        <text x="187" y="420" text-anchor="middle" fill="white" font-family="sans-serif" font-size="14" opacity="0.4">Sample Image ${i + 1}</text>
-      </svg>`
-    )}`
-);
 
 export function PlatformSection() {
   const outerRef = useRef<HTMLDivElement>(null);
@@ -64,17 +60,14 @@ export function PlatformSection() {
   }, [handleScroll]);
 
   return (
-    // Outer container: tall enough to create scroll room (100vh per feature)
     <div
       ref={outerRef}
       style={{ height: `${features.length * 100}vh` }}
       className="relative"
     >
-      {/* Sticky inner — locks to viewport. NO transforms allowed here or in children. */}
       <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center py-12 md:py-16">
         <section className="w-full px-6" aria-labelledby="platform-heading">
           <div className="max-w-[1200px] mx-auto">
-            {/* Header — no ScrollReveal (transforms break sticky) */}
             <div className="mb-6 md:mb-10">
               <p className="font-['Inter',sans-serif] font-medium text-[12px] leading-[18px] tracking-[3px] uppercase text-[#A08567] mb-4">
                 The Platform
@@ -95,9 +88,7 @@ export function PlatformSection() {
               </p>
             </div>
 
-            {/* Content: features list + phone image */}
             <div className="flex gap-12 lg:gap-20 items-center">
-              {/* Left — all features visible, active one highlighted */}
               <div className="flex-1">
                 {features.map((feature, i) => (
                   <div
@@ -128,14 +119,14 @@ export function PlatformSection() {
                 ))}
               </div>
 
-              {/* Right — phone with crossfading images */}
+              {/* Phone mockup with real images */}
               <div className="hidden lg:flex w-[340px] shrink-0 items-center justify-center">
                 <div className="relative w-[280px] h-[600px] rounded-[32px] overflow-hidden border border-[rgba(255,255,255,0.1)] bg-[#1a1414]">
-                  {placeholderImages.map((src, i) => (
+                  {features.map((feature, i) => (
                     <img
                       key={i}
-                      src={src}
-                      alt={`${features[i].title} screen`}
+                      src={feature.image}
+                      alt={`${feature.title} screen`}
                       className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
                       style={{ opacity: activeIndex === i ? 1 : 0 }}
                     />
