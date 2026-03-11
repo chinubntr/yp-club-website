@@ -41,12 +41,9 @@ function YPClubLogoSVG({ mobile = false }: { mobile?: boolean }) {
   );
 }
 
-const subpageLinks = [
-  { label: "Home", href: "/" },
-  { label: "Waitlist", href: "/waitlist" },
-  { label: "Brochure", href: "/brochure" },
-  { label: "About", href: "/about" },
-  { label: "FAQ", href: "/faq" },
+const mobileMenuLinks = [
+  { label: "Download Brochure", href: "/brochure", primary: false },
+  { label: "Join the Waitlist", href: "/waitlist", primary: true },
 ];
 
 function MobileMenu({
@@ -104,12 +101,16 @@ function MobileMenu({
           backdropFilter: "blur(60px) saturate(200%)",
         }}
       >
-        {subpageLinks.map((link) => (
+        {mobileMenuLinks.map((link) => (
           <Link
             key={link.label}
             to={link.href}
             onClick={onClose}
-            className="flex items-center justify-center h-[44px] border border-[rgba(255,255,255,0.1)] font-['Inter',sans-serif] font-medium text-[12px] tracking-[1.65px] uppercase text-[#8d8d8d] hover:text-[#fcfcfc] hover:border-[rgba(255,255,255,0.2)] transition-colors outline-none focus-visible:ring-1 focus-visible:ring-[#A08567] rounded-sm"
+            className={`flex items-center justify-center h-[44px] font-['Inter',sans-serif] font-${link.primary ? "semibold" : "medium"} text-[12px] tracking-[1.65px] uppercase transition-colors outline-none focus-visible:ring-1 focus-visible:ring-[#A08567] rounded-sm ${
+              link.primary
+                ? "bg-[#1e4d57] border border-[#1e4d57] text-[#fcfcfc]"
+                : "border border-[rgba(255,255,255,0.1)] text-[#8d8d8d] hover:text-[#fcfcfc] hover:border-[rgba(255,255,255,0.2)]"
+            }`}
           >
             {link.label}
           </Link>
