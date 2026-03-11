@@ -1,10 +1,8 @@
 import { ScrollReveal } from "./ScrollReveal";
-import { motion, useReducedMotion } from "motion/react";
 import { Link } from "react-router";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 export function CtaSection() {
-  const prefersReducedMotion = useReducedMotion();
   return (
     <section
       className="py-20 md:py-28 px-6 relative overflow-hidden"
@@ -29,14 +27,9 @@ export function CtaSection() {
         />
       </div>
 
-      {/* Animated glow */}
-      <motion.div
-        animate={prefersReducedMotion ? {} : {
-          scale: [1, 1.2, 1],
-          opacity: [0.04, 0.08, 0.04],
-        }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#1e4d57] blur-[120px] pointer-events-none"
+      {/* Static glow */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#1e4d57] blur-[120px] pointer-events-none opacity-[0.06]"
       />
 
       <div className="relative max-w-[700px] mx-auto text-center">

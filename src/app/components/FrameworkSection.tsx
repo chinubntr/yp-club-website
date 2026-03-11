@@ -1,5 +1,4 @@
 import { ScrollReveal, StaggerContainer, StaggerItem } from "./ScrollReveal";
-import { motion } from "motion/react";
 import { useState } from "react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
@@ -38,19 +37,17 @@ function PillarCard({
   const [hovered, setHovered] = useState(false);
 
   return (
-    <motion.div
-      onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       role="article"
       aria-label={`${pillar.title} pillar`}
       className="relative bg-[#1a1414] border border-[rgba(255,255,255,0.1)] overflow-hidden p-10 min-h-[308px] cursor-default"
     >
       {/* Hover background image */}
-      <motion.div
-        initial={false}
-        animate={{ opacity: hovered ? 1 : 0, scale: hovered ? 1.05 : 1 }}
-        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-        className="absolute inset-0 pointer-events-none"
+      <div
+        className="absolute inset-0 pointer-events-none transition-opacity duration-500"
+        style={{ opacity: hovered ? 1 : 0 }}
       >
         <ImageWithFallback
           src={pillar.image}
@@ -59,49 +56,37 @@ function PillarCard({
           className="absolute inset-0 size-full object-cover opacity-[0.15]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#1a1414] via-[rgba(26,20,20,0.85)] to-[rgba(26,20,20,0.6)]" />
-      </motion.div>
+      </div>
 
       {/* Hover border glow */}
-      <motion.div
-        initial={false}
-        animate={{
-          opacity: hovered ? 1 : 0,
-        }}
-        transition={{ duration: 0.4 }}
-        className="absolute inset-0 border border-[rgba(129,106,84,0.3)] pointer-events-none"
+      <div
+        className="absolute inset-0 border border-[rgba(129,106,84,0.3)] pointer-events-none transition-opacity duration-400"
+        style={{ opacity: hovered ? 1 : 0 }}
       />
 
       {/* Content */}
       <div className="relative z-10">
-        <motion.span
-          initial={false}
-          animate={{
-            color: hovered ? "rgba(160,133,103,1)" : "rgba(160,133,103,0.75)",
-          }}
-          transition={{ duration: 0.4 }}
-          className="font-['Cormorant_Garamond',serif] font-light text-[40px] md:text-[48px] leading-[40px] md:leading-[48px] mb-6 block"
+        <span
+          className="font-['Cormorant_Garamond',serif] font-light text-[40px] md:text-[48px] leading-[40px] md:leading-[48px] mb-6 block transition-colors duration-400"
+          style={{ color: hovered ? "rgba(160,133,103,1)" : "rgba(160,133,103,0.75)" }}
           aria-hidden="true"
         >
           {pillar.num}
-        </motion.span>
-        <motion.h3
-          initial={false}
-          animate={{ x: hovered ? 4 : 0 }}
-          transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-          className="font-['Cormorant_Garamond',serif] font-normal text-[24px] md:text-[28px] leading-[42px] text-[#fcfcfc] mb-4"
+        </span>
+        <h3
+          className="font-['Cormorant_Garamond',serif] font-normal text-[24px] md:text-[28px] leading-[42px] text-[#fcfcfc] mb-4 transition-transform duration-400"
+          style={{ transform: hovered ? "translateX(4px)" : "translateX(0)" }}
         >
           {pillar.title}
-        </motion.h3>
-        <motion.p
-          initial={false}
-          animate={{ opacity: hovered ? 1 : 0.85 }}
-          transition={{ duration: 0.4 }}
-          className="font-['Inter',sans-serif] font-light text-[14px] leading-[24px] text-[#fcfcfc] max-w-[320px]"
+        </h3>
+        <p
+          className="font-['Inter',sans-serif] font-light text-[14px] leading-[24px] text-[#fcfcfc] max-w-[320px] transition-opacity duration-400"
+          style={{ opacity: hovered ? 1 : 0.85 }}
         >
           {pillar.desc}
-        </motion.p>
+        </p>
       </div>
-    </motion.div>
+    </div>
   );
 }
 

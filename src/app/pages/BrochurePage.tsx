@@ -1,5 +1,4 @@
 import { useState, useId } from "react";
-import { motion } from "motion/react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "../components/ScrollReveal";
 import {
   SubPageNav,
@@ -254,15 +253,13 @@ export default function BrochurePage() {
                         />
                       </div>
                       {errors.whatsapp && (
-                        <motion.p
+                        <p
                           id={whatsappErrorId}
-                          initial={{ opacity: 0, y: -4 }}
-                          animate={{ opacity: 1, y: 0 }}
                           role="alert"
                           className="font-['Inter',sans-serif] font-light text-[12px] text-[#F87171]"
                         >
                           {errors.whatsapp}
-                        </motion.p>
+                        </p>
                       )}
                       <div className="flex items-center gap-2 mt-1">
                         <div className="size-[4px] rounded-[2px] bg-[#816a54]" />

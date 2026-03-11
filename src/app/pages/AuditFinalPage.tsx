@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "../components/ScrollReveal";
 import { SubPageNav, PageFooter } from "../components/PageLayout";
 import {
@@ -100,29 +99,20 @@ function Section({
               {title}
             </span>
           </div>
-          <motion.div
-            animate={{ rotate: open ? 180 : 0 }}
-            transition={{ duration: 0.3 }}
-            className="shrink-0"
+          <div
+            className="shrink-0 transition-transform duration-300"
+            style={{ transform: open ? "rotate(180deg)" : "rotate(0deg)" }}
           >
             <ChevronDown size={18} className="text-[#767676]" />
-          </motion.div>
+          </div>
         </button>
-        <AnimatePresence initial={false}>
-          {open && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-              className="overflow-hidden"
-            >
-              <div className="px-6 md:px-8 pb-8 pt-2 border-t border-[rgba(255,255,255,0.05)]">
-                {children}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {open && (
+          <div className="overflow-hidden">
+            <div className="px-6 md:px-8 pb-8 pt-2 border-t border-[rgba(255,255,255,0.05)]">
+              {children}
+            </div>
+          </div>
+        )}
       </div>
     </ScrollReveal>
   );

@@ -1,68 +1,8 @@
 import { ScrollReveal, StaggerContainer, StaggerItem } from "./ScrollReveal";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { useEffect, useRef, useState } from "react";
-import { useReducedMotion } from "motion/react";
 import imgBuiltFor from "figma:asset/9b5599e2f0b119efb1693627ede44449dc62ddbc.png";
 
 const tags = ["Founders", "Co-Founders", "AED 1M \u2013 30M Revenue", "Dubai Based"];
-
-function InfiniteTagScroll() {
-  const prefersReducedMotion = useReducedMotion();
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [offset, setOffset] = useState(0);
-  const [setWidth, setSetWidth] = useState(0);
-  const rafRef = useRef<number>(0);
-  const lastTimeRef = useRef<number>(0);
-  const speed = 25;
-
-  useEffect(() => {
-    if (!scrollRef.current) return;
-    const firstSet = scrollRef.current.querySelector<HTMLElement>("[data-tag-set]");
-    if (firstSet) setSetWidth(firstSet.offsetWidth);
-  }, []);
-
-  useEffect(() => {
-    if (prefersReducedMotion || setWidth === 0) return;
-    const tick = (time: number) => {
-      if (lastTimeRef.current) {
-        const delta = (time - lastTimeRef.current) / 1000;
-        setOffset((prev) => {
-          const next = prev + speed * delta;
-          return next >= setWidth ? next - setWidth : next;
-        });
-      }
-      lastTimeRef.current = time;
-      rafRef.current = requestAnimationFrame(tick);
-    };
-    rafRef.current = requestAnimationFrame(tick);
-    return () => {
-      cancelAnimationFrame(rafRef.current);
-      lastTimeRef.current = 0;
-    };
-  }, [prefersReducedMotion, setWidth]);
-
-  const tagSet = tags.map((tag) => (
-    <div key={tag} className="border border-[rgba(129,106,84,0.3)] px-5 py-2 shrink-0">
-      <span className="font-['Inter',sans-serif] font-medium text-[12px] leading-[18px] tracking-[1.65px] uppercase text-[#A08567] whitespace-nowrap">
-        {tag}
-      </span>
-    </div>
-  ));
-
-  return (
-    <div className="overflow-hidden -mx-6">
-      <div
-        ref={scrollRef}
-        className="flex"
-        style={{ transform: `translateX(-${offset}px)`, willChange: "transform" }}
-      >
-        <div data-tag-set className="flex gap-3 pr-3 shrink-0">{tagSet}</div>
-        <div className="flex gap-3 pr-3 shrink-0">{tagSet}</div>
-        <div className="flex gap-3 pr-3 shrink-0">{tagSet}</div>
-      </div>
-    </div>
-  );
-}
 
 export function BuiltForSection() {
   return (
@@ -137,9 +77,15 @@ export function BuiltForSection() {
             ))}
           </StaggerContainer>
 
-          {/* Mobile: infinite horizontal scroll */}
-          <div className="sm:hidden">
-            <InfiniteTagScroll />
+          {/* Mobile: static tags */}
+          <div className="sm:hidden flex flex-wrap items-center justify-center gap-3">
+            {tags.map((tag) => (
+              <div key={tag} className="border border-[rgba(129,106,84,0.3)] px-5 py-2 shrink-0">
+                <span className="font-['Inter',sans-serif] font-medium text-[12px] leading-[18px] tracking-[1.65px] uppercase text-[#A08567] whitespace-nowrap">
+                  {tag}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </div>

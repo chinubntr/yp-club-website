@@ -1,4 +1,3 @@
-import { motion, useReducedMotion } from "motion/react";
 import {
   ScrollReveal,
   StaggerContainer,
@@ -73,7 +72,6 @@ const memberTestimonials = [
 ];
 
 export default function ReferralPage() {
-  const prefersReducedMotion = useReducedMotion();
   return (
     <div className="min-h-screen bg-[#1a1414] text-[#fcfcfc] overflow-x-hidden">
       <SEOHead
@@ -266,12 +264,10 @@ export default function ReferralPage() {
                           main: "Google Play",
                         },
                       ].map((store) => (
-                        <motion.a
+                        <a
                           key={store.main}
                           href="#"
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                          className="h-[66px] bg-[rgba(252,252,252,0.03)] rounded-[2px] border border-[rgba(252,252,252,0.12)] flex items-center gap-4 px-5"
+                          className="h-[66px] bg-[rgba(252,252,252,0.03)] rounded-[2px] border border-[rgba(252,252,252,0.12)] flex items-center gap-4 px-5 hover:scale-[1.02] active:scale-[0.98] transition-transform"
                         >
                           <svg
                             className="size-[26px] shrink-0"
@@ -291,7 +287,7 @@ export default function ReferralPage() {
                               {store.main}
                             </p>
                           </div>
-                        </motion.a>
+                        </a>
                       ))}
                     </div>
 
@@ -369,12 +365,8 @@ export default function ReferralPage() {
             >
               {memberTestimonials.map((t) => (
                 <StaggerItem key={t.name}>
-                  <motion.div
-                    whileHover={{
-                      backgroundColor: "rgba(129,106,84,0.04)",
-                    }}
-                    transition={{ duration: 0.4 }}
-                    className="bg-[#1a1414] border-t border-[rgba(255,255,255,0.1)] p-8 h-full"
+                  <div
+                    className="bg-[#1a1414] border-t border-[rgba(255,255,255,0.1)] p-8 h-full hover:bg-[rgba(129,106,84,0.04)] transition-colors duration-400"
                   >
                     <div className="inline-block bg-[rgba(129,106,84,0.1)] border border-[rgba(129,106,84,0.25)] px-2.5 py-1.5 mb-4">
                       <span className="font-['Cormorant_Garamond',serif] italic text-[12px] leading-[18px] text-[#A08567]">
@@ -395,7 +387,7 @@ export default function ReferralPage() {
                         {t.company}
                       </p>
                     </div>
-                  </motion.div>
+                  </div>
                 </StaggerItem>
               ))}
             </StaggerContainer>
@@ -405,13 +397,7 @@ export default function ReferralPage() {
         {/* Bottom banner */}
         <section className="py-16 px-6 text-center">
           <ScrollReveal direction="up">
-            <motion.div
-              animate={prefersReducedMotion ? {} : { y: [0, 6, 0] }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
+            <div
               className="size-3 rounded-full border border-[rgba(252,252,252,0.1)] mx-auto mb-6"
             />
             <p className="font-['Inter',sans-serif] font-light text-[14px] leading-[24px] text-[#fcfcfc] max-w-[520px] mx-auto">
@@ -420,11 +406,9 @@ export default function ReferralPage() {
               waiting.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8">
-              <motion.a
+              <a
                 href="#"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="h-[48px] bg-[rgba(252,252,252,0.03)] rounded-[2px] border border-[rgba(252,252,252,0.12)] flex items-center gap-4 px-6"
+                className="h-[48px] bg-[rgba(252,252,252,0.03)] rounded-[2px] border border-[rgba(252,252,252,0.12)] flex items-center gap-4 px-6 hover:scale-[1.02] active:scale-[0.98] transition-transform"
               >
                 <svg
                   className="size-[20px]"
@@ -436,12 +420,10 @@ export default function ReferralPage() {
                 <span className="font-['Inter',sans-serif] font-medium text-[12px] text-[#fcfcfc]">
                   App Store
                 </span>
-              </motion.a>
-              <motion.a
+              </a>
+              <a
                 href="#"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="h-[48px] bg-[rgba(252,252,252,0.03)] rounded-[2px] border border-[rgba(252,252,252,0.12)] flex items-center gap-4 px-6"
+                className="h-[48px] bg-[rgba(252,252,252,0.03)] rounded-[2px] border border-[rgba(252,252,252,0.12)] flex items-center gap-4 px-6 hover:scale-[1.02] active:scale-[0.98] transition-transform"
               >
                 <svg
                   className="size-[20px]"
@@ -453,7 +435,7 @@ export default function ReferralPage() {
                 <span className="font-['Inter',sans-serif] font-medium text-[12px] text-[#fcfcfc]">
                   Google Play
                 </span>
-              </motion.a>
+              </a>
             </div>
           </ScrollReveal>
         </section>

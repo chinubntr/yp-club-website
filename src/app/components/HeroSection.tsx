@@ -1,10 +1,8 @@
-import { motion, useReducedMotion } from "motion/react";
 import { Link } from "react-router";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import imgHeroBackground from "figma:asset/fb575fd1c24a67ef37938de4ccae63bccfd5c87e.png";
 
 export function HeroSection() {
-  const prefersReducedMotion = useReducedMotion();
   return (
     <section
       className="relative flex flex-col items-center justify-center overflow-hidden min-h-[calc(100svh-60px)] md:min-h-screen"
@@ -36,25 +34,16 @@ export function HeroSection() {
       </div>
 
       {/* Decorative vertical lines — desktop only */}
-      <motion.div
-        initial={{ scaleY: 0 }}
-        animate={{ scaleY: 1 }}
-        transition={{ duration: 1.2, delay: 1.5, ease: [0.25, 0.1, 0.25, 1] }}
+      <div
         className="hidden lg:block absolute left-16 top-[280px] w-px h-[160px] bg-gradient-to-b from-transparent via-[rgba(129,106,84,0.3)] to-transparent origin-top"
       />
-      <motion.div
-        initial={{ scaleY: 0 }}
-        animate={{ scaleY: 1 }}
-        transition={{ duration: 1.2, delay: 1.7, ease: [0.25, 0.1, 0.25, 1] }}
+      <div
         className="hidden lg:block absolute right-16 top-[280px] w-px h-[160px] bg-gradient-to-b from-transparent via-[rgba(129,106,84,0.3)] to-transparent origin-top"
       />
 
       <div className="relative max-w-[960px] mx-auto px-5 sm:px-6 text-center pt-24 md:pt-[140px]">
         {/* Label */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+        <div
           className="flex items-center justify-center gap-3 mb-4 md:mb-6"
         >
           <div className="w-6 md:w-8 h-px bg-[#816a54]" />
@@ -62,35 +51,26 @@ export function HeroSection() {
             Private Founder Network in Dubai
           </p>
           <div className="w-6 md:w-8 h-px bg-[#816a54]" />
-        </motion.div>
+        </div>
 
         {/* Main heading — 2 visual lines on mobile, 3 on desktop */}
         <div className="mb-5 md:mb-8">
-          <motion.h1
+          <h1
             id="hero-heading"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
             className="font-['Cormorant_Garamond',serif] font-light text-[clamp(24px,5vw,56px)] leading-[1.15] tracking-[-0.5px] md:tracking-[-1px] text-[#fcfcfc] text-center"
           >
             <span className="block whitespace-nowrap">The Operating System</span>
             <span className="block whitespace-nowrap">for Founders Who Are</span>
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            <span
               className="block whitespace-nowrap italic text-[#A08567]"
             >
               Serious About What Comes Next.
-            </motion.span>
-          </motion.h1>
+            </span>
+          </h1>
         </div>
 
         {/* Subtext — concise on mobile, fuller on desktop */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
+        <p
           className="font-['Inter',sans-serif] font-light text-[14px] md:text-[15px] leading-[22px] md:leading-[24px] text-[#d4d4d4] max-w-[500px] mx-auto mb-7 md:mb-10"
         >
           <span className="hidden sm:inline">
@@ -105,13 +85,10 @@ export function HeroSection() {
             scaling from AED 1M to AED 30M. Over $12M in deals. 48+ events
             yearly. Powered by PioneerOS.
           </span>
-        </motion.p>
+        </p>
 
         {/* CTA — single primary on mobile, both on sm+ */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.1, ease: [0.25, 0.1, 0.25, 1] }}
+        <div
           className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
         >
           <Link
@@ -130,25 +107,20 @@ export function HeroSection() {
               Download Brochure
             </span>
           </Link>
-        </motion.div>
+        </div>
       </div>
 
       {/* Scroll indicator — hidden on mobile to save space */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.6 }}
+      <div
         className="relative hidden md:flex flex-col items-center gap-2 mt-12 pb-8"
       >
         <p className="font-['Inter',sans-serif] font-normal text-[12px] leading-[18px] tracking-[2.25px] uppercase text-[#878787]">
           Scroll
         </p>
-        <motion.div
-          animate={prefersReducedMotion ? {} : { y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        <div
           className="w-px h-[36px] bg-gradient-to-b from-[#A08567] to-transparent"
         />
-      </motion.div>
+      </div>
     </section>
   );
 }

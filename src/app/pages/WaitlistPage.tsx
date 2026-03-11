@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { Play, X } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "../components/ScrollReveal";
 import { SubPageNav, PageFooter, QuoteSection } from "../components/PageLayout";
@@ -39,7 +38,6 @@ const stats = [
 export default function WaitlistPage() {
   const [videoOpen, setVideoOpen] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const prefersReducedMotion = useReducedMotion();
 
   // Focus trap + Escape for video modal
   useEffect(() => {
@@ -136,15 +134,13 @@ export default function WaitlistPage() {
               </div>
 
               {/* Play button */}
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
+              <button
                 onClick={() => setVideoOpen(true)}
-                className="relative z-10 size-[72px] rounded-full bg-[rgba(30,77,87,0.9)] border border-[rgba(30,77,87,0.5)] flex items-center justify-center pl-1 outline-none focus:ring-2 focus:ring-[#A08567]"
+                className="relative z-10 size-[72px] rounded-full bg-[rgba(30,77,87,0.9)] border border-[rgba(30,77,87,0.5)] flex items-center justify-center pl-1 outline-none focus:ring-2 focus:ring-[#A08567] hover:scale-110 active:scale-95 transition-transform"
                 aria-label="Play introduction video"
               >
                 <Play size={24} fill="#fcfcfc" className="text-[#fcfcfc]" />
-              </motion.button>
+              </button>
 
               <p className="relative z-10 font-['Cormorant_Garamond',serif] italic text-[13px] leading-[19.5px] tracking-[0.65px] text-[rgba(252,252,252,0.8)] mt-6">
                 Introducing the Pioneer Operating System
@@ -161,46 +157,37 @@ export default function WaitlistPage() {
         </ScrollReveal>
 
         {/* Video modal overlay */}
-        <AnimatePresence>
-          {videoOpen && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              role="dialog"
-              aria-modal="true"
-              aria-label="Video player"
-              className="fixed inset-0 z-[100] bg-[rgba(26,20,20,0.95)] flex items-center justify-center p-6"
-              onClick={() => setVideoOpen(false)}
+        {videoOpen && (
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Video player"
+            className="fixed inset-0 z-[100] bg-[rgba(26,20,20,0.95)] flex items-center justify-center p-6"
+            onClick={() => setVideoOpen(false)}
+          >
+            <div
+              className="relative w-full max-w-[860px] aspect-video bg-[#1a1414] border border-[rgba(255,255,255,0.1)] rounded-[4px] flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
             >
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="relative w-full max-w-[860px] aspect-video bg-[#1a1414] border border-[rgba(255,255,255,0.1)] rounded-[4px] flex items-center justify-center"
-                onClick={(e) => e.stopPropagation()}
+              <button
+                ref={closeButtonRef}
+                onClick={() => setVideoOpen(false)}
+                className="absolute top-4 right-4 text-[#8d8d8d] hover:text-[#fcfcfc] transition-colors z-10 outline-none focus-visible:ring-1 focus-visible:ring-[#A08567] rounded-sm p-1"
+                aria-label="Close video"
               >
-                <button
-                  ref={closeButtonRef}
-                  onClick={() => setVideoOpen(false)}
-                  className="absolute top-4 right-4 text-[#8d8d8d] hover:text-[#fcfcfc] transition-colors z-10 outline-none focus-visible:ring-1 focus-visible:ring-[#A08567] rounded-sm p-1"
-                  aria-label="Close video"
-                >
-                  <X size={24} />
-                </button>
-                <div className="text-center px-8">
-                  <p className="font-['Cormorant_Garamond',serif] font-light text-[24px] md:text-[32px] leading-[1.2] text-[#fcfcfc] mb-2">
-                    Video coming soon.
-                  </p>
-                  <p className="font-['Inter',sans-serif] font-light text-[14px] leading-[24px] text-[#fcfcfc]">
-                    The introduction video is being produced. Check back shortly.
-                  </p>
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                <X size={24} />
+              </button>
+              <div className="text-center px-8">
+                <p className="font-['Cormorant_Garamond',serif] font-light text-[24px] md:text-[32px] leading-[1.2] text-[#fcfcfc] mb-2">
+                  Video coming soon.
+                </p>
+                <p className="font-['Inter',sans-serif] font-light text-[14px] leading-[24px] text-[#fcfcfc]">
+                  The introduction video is being produced. Check back shortly.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Scroll indicator */}
         <ScrollReveal direction="up" delay={0.4}>
@@ -208,9 +195,7 @@ export default function WaitlistPage() {
             <p className="font-['Inter',sans-serif] font-normal text-[12px] leading-[18px] tracking-[3px] uppercase text-[#878787]">
               How to apply
             </p>
-            <motion.div
-              animate={prefersReducedMotion ? {} : { y: [0, 6, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            <div
               className="w-px h-[40px] bg-gradient-to-b from-[#1e4d57] to-transparent opacity-[0.78]"
             />
           </div>
@@ -320,11 +305,9 @@ export default function WaitlistPage() {
 
                 {/* Store buttons */}
                 <div className="flex flex-col gap-3 mb-8">
-                  <motion.a
+                  <a
                     href="#"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="h-[66px] bg-[rgba(252,252,252,0.03)] rounded-[2px] border border-[rgba(255,255,255,0.1)] flex items-center gap-4 px-5 outline-none focus-visible:ring-1 focus-visible:ring-[#A08567]"
+                    className="h-[66px] bg-[rgba(252,252,252,0.03)] rounded-[2px] border border-[rgba(255,255,255,0.1)] flex items-center gap-4 px-5 outline-none focus-visible:ring-1 focus-visible:ring-[#A08567] hover:scale-[1.02] active:scale-[0.98] transition-transform"
                     aria-label="Download YP Club on the App Store"
                   >
                     <svg
@@ -343,12 +326,10 @@ export default function WaitlistPage() {
                         App Store
                       </p>
                     </div>
-                  </motion.a>
-                  <motion.a
+                  </a>
+                  <a
                     href="#"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="h-[66px] bg-[rgba(252,252,252,0.03)] rounded-[2px] border border-[rgba(255,255,255,0.1)] flex items-center gap-4 px-5 outline-none focus-visible:ring-1 focus-visible:ring-[#A08567]"
+                    className="h-[66px] bg-[rgba(252,252,252,0.03)] rounded-[2px] border border-[rgba(255,255,255,0.1)] flex items-center gap-4 px-5 outline-none focus-visible:ring-1 focus-visible:ring-[#A08567] hover:scale-[1.02] active:scale-[0.98] transition-transform"
                     aria-label="Get YP Club on Google Play"
                   >
                     <svg
@@ -367,7 +348,7 @@ export default function WaitlistPage() {
                         Google Play
                       </p>
                     </div>
-                  </motion.a>
+                  </a>
                 </div>
 
                 {/* Divider + contact */}

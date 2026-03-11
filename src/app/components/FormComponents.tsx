@@ -1,4 +1,3 @@
-import { motion } from "motion/react";
 import { Check } from "lucide-react";
 import { useId } from "react";
 
@@ -50,15 +49,13 @@ export function InputField({
         className={`w-full h-[46px] bg-[rgba(252,252,252,0.03)] rounded-[2px] border ${borderColor} px-4 font-['Inter',sans-serif] font-light text-[13px] text-[#fcfcfc] placeholder:text-[rgba(252,252,252,0.35)] outline-none focus-visible:border-[#A08567] focus-visible:ring-1 focus-visible:ring-[#A08567] transition-colors`}
       />
       {error && (
-        <motion.p
+        <p
           id={errorId}
-          initial={{ opacity: 0, y: -4 }}
-          animate={{ opacity: 1, y: 0 }}
           role="alert"
           className="font-['Inter',sans-serif] font-light text-[12px] leading-[18px] text-[#F87171]"
         >
           {error}
-        </motion.p>
+        </p>
       )}
     </div>
   );
@@ -109,15 +106,13 @@ export function CheckboxField({
         </label>
       </div>
       {error && (
-        <motion.p
+        <p
           id={errorId}
-          initial={{ opacity: 0, y: -4 }}
-          animate={{ opacity: 1, y: 0 }}
           role="alert"
           className="font-['Inter',sans-serif] font-light text-[12px] leading-[18px] text-[#F87171] ml-7"
         >
           {error}
-        </motion.p>
+        </p>
       )}
     </div>
   );
@@ -134,20 +129,16 @@ export function SubmitButton({
   onClick?: () => void;
 }) {
   return (
-    <motion.button
+    <button
       type={type}
-      whileHover={{ scale: 1.01 }}
-      whileTap={{ scale: 0.98 }}
       disabled={loading}
       aria-busy={loading}
       aria-disabled={loading}
       className="w-full h-[54px] bg-[#1e4d57] border border-[#1e4d57] rounded-[2px] flex items-center justify-center hover:opacity-90 transition-opacity disabled:opacity-60 outline-none focus-visible:ring-2 focus-visible:ring-[#A08567]"
     >
       {loading ? (
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          className="size-5 border-2 border-[rgba(252,252,252,0.3)] border-t-[#fcfcfc] rounded-full"
+        <div
+          className="size-5 border-2 border-[rgba(252,252,252,0.3)] border-t-[#fcfcfc] rounded-full animate-spin"
           role="status"
           aria-label="Submitting"
         />
@@ -156,7 +147,7 @@ export function SubmitButton({
           {label}
         </span>
       )}
-    </motion.button>
+    </button>
   );
 }
 
@@ -170,22 +161,16 @@ export function ThankYouState({
   message: string;
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+    <div
       className="flex flex-col items-center justify-center text-center py-16 px-8"
       role="status"
       aria-live="polite"
     >
-      <motion.div
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 0.5, delay: 0.2, type: "spring" }}
+      <div
         className="size-16 rounded-full bg-[rgba(2,167,60,0.15)] border border-[rgba(2,167,60,0.3)] flex items-center justify-center mb-8"
       >
         <Check size={28} className="text-[#02A73C]" />
-      </motion.div>
+      </div>
       <p className="font-['Cormorant_Garamond',serif] font-light text-[28px] md:text-[32px] leading-[38px] text-[#fcfcfc] mb-1">
         {title}
       </p>
@@ -195,6 +180,6 @@ export function ThankYouState({
       <p className="font-['Inter',sans-serif] font-light text-[14px] leading-[24px] text-[#fcfcfc] max-w-[400px]">
         {message}
       </p>
-    </motion.div>
+    </div>
   );
 }

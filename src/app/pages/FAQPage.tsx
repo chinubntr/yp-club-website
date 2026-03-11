@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import { motion, AnimatePresence } from "motion/react";
 import { ChevronDown } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "../components/ScrollReveal";
 import { SubPageNav, PageFooter, QuoteSection } from "../components/PageLayout";
@@ -121,32 +120,25 @@ function FAQItem({ q, a }: { q: string; a: string }) {
         <span className="flex-1 font-['Inter',sans-serif] font-medium text-[14px] leading-[22px] text-[#fcfcfc] group-hover:text-[#816a54] transition-colors">
           {q}
         </span>
-        <motion.div
-          animate={{ rotate: open ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
-          className="shrink-0 mt-1"
+        <div
+          className="shrink-0 mt-1 transition-transform duration-300"
+          style={{ transform: open ? "rotate(180deg)" : "rotate(0deg)" }}
         >
           <ChevronDown size={16} className="text-[#767676]" />
-        </motion.div>
+        </div>
       </button>
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            id={id}
-            role="region"
-            aria-label={q}
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
-            className="overflow-hidden"
-          >
-            <p className="font-['Inter',sans-serif] font-light text-[14px] leading-[24px] text-[#fcfcfc] pb-5 pr-8 max-w-[680px]">
-              {a}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {open && (
+        <div
+          id={id}
+          role="region"
+          aria-label={q}
+          className="overflow-hidden"
+        >
+          <p className="font-['Inter',sans-serif] font-light text-[14px] leading-[24px] text-[#fcfcfc] pb-5 pr-8 max-w-[680px]">
+            {a}
+          </p>
+        </div>
+      )}
     </div>
   );
 }

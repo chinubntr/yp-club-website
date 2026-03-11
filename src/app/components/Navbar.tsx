@@ -1,4 +1,3 @@
-import { motion, AnimatePresence } from "motion/react";
 import { Link } from "react-router";
 import svgPaths from "../../imports/svg-l31yrew5ki";
 import { useState, useEffect } from "react";
@@ -81,10 +80,7 @@ export function Navbar() {
   }, [mobileOpen]);
 
   return (
-    <motion.nav
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+    <nav
       aria-label="Main navigation"
       className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-16 h-[70px] md:h-[85px] transition-all duration-500 ${
         scrolled
@@ -141,59 +137,49 @@ export function Navbar() {
       </button>
 
       {/* Mobile menu overlay + panel */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <>
-            {/* Full-screen backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="fixed inset-0 z-40 bg-[rgba(26,20,20,0.6)] md:hidden"
+      {mobileOpen && (
+        <>
+          {/* Full-screen backdrop */}
+          <div
+            className="fixed inset-0 z-40 bg-[rgba(26,20,20,0.6)] md:hidden"
+            onClick={closeMobile}
+            aria-hidden="true"
+          />
+          {/* Menu panel with focus trap */}
+          <div
+            ref={containerRef}
+            id="mobile-nav-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation menu"
+            onKeyDown={handleKeyDown}
+            className="fixed top-[70px] left-0 right-0 z-50 bg-[rgba(26,20,20,0.85)] border-b border-[rgba(255,255,255,0.1)] p-6 flex flex-col gap-3 md:hidden"
+            style={{
+              WebkitBackdropFilter: "blur(60px) saturate(200%)",
+              backdropFilter: "blur(60px) saturate(200%)",
+            }}
+          >
+            <Link
+              to="/brochure"
               onClick={closeMobile}
-              aria-hidden="true"
-            />
-            {/* Menu panel with focus trap */}
-            <motion.div
-              ref={containerRef}
-              id="mobile-nav-panel"
-              role="dialog"
-              aria-modal="true"
-              aria-label="Mobile navigation menu"
-              onKeyDown={handleKeyDown}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
-              className="fixed top-[70px] left-0 right-0 z-50 bg-[rgba(26,20,20,0.85)] border-b border-[rgba(255,255,255,0.1)] p-6 flex flex-col gap-3 md:hidden"
-              style={{
-                WebkitBackdropFilter: "blur(60px) saturate(200%)",
-                backdropFilter: "blur(60px) saturate(200%)",
-              }}
+              className="flex items-center justify-center h-[44px] border border-[rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.2)] transition-colors outline-none focus-visible:ring-1 focus-visible:ring-[#A08567] rounded-sm"
             >
-              <Link
-                to="/brochure"
-                onClick={closeMobile}
-                className="flex items-center justify-center h-[44px] border border-[rgba(255,255,255,0.1)] hover:border-[rgba(255,255,255,0.2)] transition-colors outline-none focus-visible:ring-1 focus-visible:ring-[#A08567] rounded-sm"
-              >
-                <span className="font-['Inter',sans-serif] font-medium text-[12px] tracking-[1.65px] uppercase text-[#8d8d8d]">
-                  Download Brochure
-                </span>
-              </Link>
-              <Link
-                to="/waitlist"
-                onClick={closeMobile}
-                className="flex items-center justify-center h-[44px] bg-[#1e4d57] border border-[#1e4d57] outline-none focus-visible:ring-1 focus-visible:ring-[#A08567] rounded-sm"
-              >
-                <span className="font-['Inter',sans-serif] font-semibold text-[12px] tracking-[1.65px] uppercase text-[#fcfcfc]">
-                  Join the Waitlist
-                </span>
-              </Link>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-    </motion.nav>
+              <span className="font-['Inter',sans-serif] font-medium text-[12px] tracking-[1.65px] uppercase text-[#8d8d8d]">
+                Download Brochure
+              </span>
+            </Link>
+            <Link
+              to="/waitlist"
+              onClick={closeMobile}
+              className="flex items-center justify-center h-[44px] bg-[#1e4d57] border border-[#1e4d57] outline-none focus-visible:ring-1 focus-visible:ring-[#A08567] rounded-sm"
+            >
+              <span className="font-['Inter',sans-serif] font-semibold text-[12px] tracking-[1.65px] uppercase text-[#fcfcfc]">
+                Join the Waitlist
+              </span>
+            </Link>
+          </div>
+        </>
+      )}
+    </nav>
   );
 }
