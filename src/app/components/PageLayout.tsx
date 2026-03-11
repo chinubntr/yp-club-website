@@ -12,7 +12,7 @@ function YPClubLogoSVG({ mobile = false }: { mobile?: boolean }) {
         className={
           mobile
             ? "relative h-[14px] w-[94px]"
-            : "relative h-[14px] w-[94px] md:h-[18px] md:w-[120px]"
+            : "relative h-[14px] w-[94px] md:h-[16px] md:w-[108px]"
         }
       >
         <svg
@@ -95,7 +95,7 @@ function MobileMenu({
         aria-modal="true"
         aria-label="Mobile navigation menu"
         onKeyDown={handleKeyDown}
-        className="fixed top-[66px] left-0 right-0 z-50 bg-[rgba(26,20,20,0.85)] border-b border-[rgba(255,255,255,0.1)] p-6 flex flex-col gap-3 md:hidden"
+        className="fixed top-[70px] left-0 right-0 z-50 bg-[rgba(26,20,20,0.85)] border-b border-[rgba(255,255,255,0.1)] p-6 flex flex-col gap-3 md:hidden"
         style={{
           WebkitBackdropFilter: "blur(60px) saturate(200%)",
           backdropFilter: "blur(60px) saturate(200%)",
@@ -125,7 +125,7 @@ export function SubPageNav({ rightLabel }: { rightLabel?: string }) {
 
   return (
     <nav
-      className="sticky top-0 z-50 h-[66px] flex items-center justify-between px-6 md:px-16 bg-[rgba(26,20,20,0.25)] backdrop-blur-3xl border-b border-[rgba(255,255,255,0.1)]"
+      className="sticky top-0 z-50 h-[70px] md:h-[85px] flex items-center justify-between px-6 md:px-16 bg-[rgba(26,20,20,0.25)] backdrop-blur-3xl border-b border-[rgba(255,255,255,0.1)]"
       style={{ WebkitBackdropFilter: "blur(40px) saturate(200%)", backdropFilter: "blur(40px) saturate(200%)" }}
       aria-label="Page navigation"
     >
@@ -156,7 +156,7 @@ export function SubPageNavInvite() {
 
   return (
     <nav
-      className="sticky top-0 z-50 h-[66px] flex items-center justify-between px-6 md:px-16 bg-[rgba(26,20,20,0.25)] backdrop-blur-3xl border-b border-[rgba(255,255,255,0.1)]"
+      className="sticky top-0 z-50 h-[70px] md:h-[85px] flex items-center justify-between px-6 md:px-16 bg-[rgba(26,20,20,0.25)] backdrop-blur-3xl border-b border-[rgba(255,255,255,0.1)]"
       style={{ WebkitBackdropFilter: "blur(40px) saturate(200%)", backdropFilter: "blur(40px) saturate(200%)" }}
       aria-label="Page navigation"
     >
@@ -180,7 +180,7 @@ export function SubPageNavInvite() {
 
 export function PageFooter({ activeLink }: { activeLink?: string }) {
   return (
-    <footer className="border-t border-[rgba(255,255,255,0.1)] px-6 md:px-16 py-6 md:h-[80px] flex flex-col md:flex-row items-center justify-between gap-4" role="contentinfo">
+    <footer className="border-t border-[rgba(255,255,255,0.1)] px-6 md:px-16 py-6 md:h-[80px] flex flex-col items-center justify-center gap-4 md:flex-row md:justify-between" role="contentinfo">
       <Link to="/" className="block outline-none focus-visible:ring-1 focus-visible:ring-[#A08567] rounded-sm" aria-label="YP Club, back to homepage">
         <div className="relative h-[12px] w-[80px] md:h-[14px] md:w-[94px]">
           <svg
@@ -256,7 +256,7 @@ export function QuoteSection({
   attribution,
 }: {
   quote: string;
-  attribution: string;
+  attribution: React.ReactNode;
 }) {
   return (
     <section className="bg-[rgba(26,20,20,0.6)] border-t border-b border-[rgba(255,255,255,0.1)] py-16 md:py-20 px-6" aria-label="Quote">

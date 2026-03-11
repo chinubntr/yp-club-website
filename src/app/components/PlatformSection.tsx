@@ -119,13 +119,13 @@ export function PlatformSection() {
 
             {/* Right column: Phone mockup aligned with content */}
             <div className="hidden lg:flex w-[300px] shrink-0 items-center justify-center">
-              <div className="relative w-full aspect-[9/19] max-h-[70vh] rounded-[8px] overflow-hidden border border-[rgba(255,255,255,0.1)] bg-[#1a1414]">
+              <div className="relative w-full max-h-[70vh] rounded-[8px] overflow-hidden">
                 {features.map((feature, i) => (
                   <img
                     key={i}
                     src={feature.image}
                     alt={`${feature.title} screen`}
-                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
+                    className={`w-full h-auto rounded-[8px] transition-opacity duration-700 ease-in-out ${i === 0 ? "relative" : "absolute inset-0"}`}
                     style={{ opacity: activeIndex === i ? 1 : 0 }}
                   />
                 ))}

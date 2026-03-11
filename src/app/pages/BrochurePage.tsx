@@ -383,7 +383,7 @@ export default function BrochurePage() {
                     }`}
                   >
                     <div className="inline-block bg-[rgba(129,106,84,0.1)] border border-[rgba(129,106,84,0.25)] px-2.5 py-1.5 mb-3">
-                      <span className="font-['Cormorant_Garamond',serif] italic text-[12px] leading-[18px] text-[#A08567]">
+                      <span className="font-['Cormorant_Garamond',serif] italic text-[16px] leading-[22px] text-[#A08567]">
                         {t.tag}
                       </span>
                     </div>

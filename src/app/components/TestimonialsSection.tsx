@@ -106,7 +106,7 @@ export function TestimonialsSection() {
 
                 {/* Tag */}
                 <div className="inline-block bg-[rgba(129,106,84,0.1)] border border-[rgba(129,106,84,0.25)] px-3 py-1.5 mb-6">
-                  <span className="font-['Cormorant_Garamond',serif] italic text-[13px] leading-[19.5px] text-[#A08567]">
+                  <span className="font-['Cormorant_Garamond',serif] italic text-[16px] leading-[22px] text-[#A08567]">
                     {t.tag}
                   </span>
                 </div>

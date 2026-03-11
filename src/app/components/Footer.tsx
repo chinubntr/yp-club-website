@@ -5,7 +5,7 @@ import svgPaths from "../../imports/svg-l31yrew5ki";
 export function Footer() {
   return (
     <ScrollReveal direction="up" duration={0.5}>
-      <footer className="border-t border-[rgba(255,255,255,0.1)] px-6 md:px-16 py-6 md:h-[80px] flex flex-col md:flex-row items-center justify-between gap-4" role="contentinfo">
+      <footer className="border-t border-[rgba(255,255,255,0.1)] px-6 md:px-16 py-6 md:h-[80px] flex flex-col items-center justify-center gap-4 md:flex-row md:justify-between" role="contentinfo">
         <Link to="/" className="block hover:opacity-80 transition-opacity outline-none focus-visible:ring-1 focus-visible:ring-[#A08567] rounded-sm" aria-label="YP Club, back to homepage">
           <div className="relative h-[12px] w-[80px] md:h-[14px] md:w-[94px]">
             <svg

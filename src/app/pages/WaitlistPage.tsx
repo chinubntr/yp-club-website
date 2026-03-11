@@ -352,7 +352,7 @@ export default function WaitlistPage() {
 
       <QuoteSection
         quote="The biggest risk a founder takes is not a bad hire or a missed market. It is spending years in the wrong room."
-        attribution="The World's First PioneerOS"
+        attribution={<>The World's First Pioneer<span className="text-[#A08567]">OS</span></>}
       />
       </main>
       <PageFooter />
