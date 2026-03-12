@@ -35,7 +35,25 @@ export function PlatformSection() {
   const outerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
+  // Track whether user tapped a feature on mobile
+  const tappedRef = useRef<number | null>(null);
+  const tapTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+
+  const handleTap = useCallback((index: number) => {
+    // Only on mobile (< lg where scroll-driven switching is the UX)
+    if (window.innerWidth >= 1024) return;
+    tappedRef.current = index;
+    setActiveIndex(index);
+    // Resume scroll-driven switching after 3s of no taps
+    clearTimeout(tapTimeoutRef.current);
+    tapTimeoutRef.current = setTimeout(() => {
+      tappedRef.current = null;
+    }, 3000);
+  }, []);
+
   const handleScroll = useCallback(() => {
+    // Skip scroll-driven updates while a tap is active
+    if (tappedRef.current !== null) return;
     if (!outerRef.current) return;
     const rect = outerRef.current.getBoundingClientRect();
     const sectionHeight = outerRef.current.offsetHeight;
@@ -56,7 +74,10 @@ export function PlatformSection() {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(tapTimeoutRef.current);
+    };
   }, [handleScroll]);
 
   return (
@@ -91,7 +112,8 @@ export function PlatformSection() {
               {features.map((feature, i) => (
                 <div
                   key={feature.title}
-                  className="py-3 md:py-4 border-l-2 pl-5 md:pl-6 transition-all duration-500"
+                  onClick={() => handleTap(i)}
+                  className="py-3 md:py-4 border-l-2 pl-5 md:pl-6 transition-all duration-500 cursor-pointer lg:cursor-default"
                   style={{
                     borderColor:
                       activeIndex === i
@@ -122,7 +144,7 @@ export function PlatformSection() {
               <div className="relative w-full max-h-[70vh] rounded-[8px] overflow-hidden">
                 {features.map((feature, i) => (
                   <img
-                    key={i}
+                    key={feature.title}
                     src={feature.image}
                     alt={`${feature.title} screen`}
                     className={`w-full h-auto rounded-[8px] transition-opacity duration-700 ease-in-out ${i === 0 ? "relative" : "absolute inset-0"}`}

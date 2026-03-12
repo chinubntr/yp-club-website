@@ -169,24 +169,6 @@ export default function AboutPage() {
             ))}
           </div>
 
-          <div className="w-full h-px bg-[rgba(255,255,255,0.1)] mb-12" />
-
-          {/* About the Founder */}
-          <ScrollReveal direction="up" delay={0.25}>
-            <div className="flex items-center gap-3 mb-3">
-              <div className="size-[6px] rounded-[3px] bg-[#1e4d57]" />
-              <p className="font-['Inter',sans-serif] font-medium text-[12px] leading-[18px] tracking-[3px] uppercase text-[#A08567]">
-                The Founder
-              </p>
-            </div>
-            <h2 className="font-['Cormorant_Garamond',serif] font-light text-[28px] md:text-[32px] leading-[39.6px] tracking-[-0.36px] text-[#fcfcfc] mb-6">
-              About the Founder
-            </h2>
-            <p className="font-['Inter',sans-serif] font-light text-[14px] leading-[24px] text-[#fcfcfc] mb-12">
-              Cameron-Lee Roberts is the CEO and Founder of YP Club. He is a Qualified Chartered Accountant (ICAS) who holds three degrees and spent his early career at EY-Parthenon and Alvarez &amp; Marsal specialising in Distressed M&amp;A and Divestitures. He has visited 45 countries and is based in Dubai. He built YP Club because the rooms that existed in Dubai were not designed for founders who are actively scaling.
-            </p>
-          </ScrollReveal>
-
           {/* CTAs */}
           <ScrollReveal direction="up" delay={0.3}>
             <div className="flex flex-col sm:flex-row items-start gap-4">

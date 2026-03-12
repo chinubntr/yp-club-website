@@ -19,7 +19,7 @@ export function WhySection() {
               <h2 id="why-heading" className="font-['Cormorant_Garamond',serif] font-light text-[28px] sm:text-[36px] md:text-[48px] leading-[1.1] text-[#fcfcfc]">
                 Most Networks Sell You Access.
                 <span className="block italic text-[#A08567]">
-                  We Sell You Outcomes.
+                  We Give You Outcomes.
                 </span>
               </h2>
             </div>

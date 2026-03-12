@@ -140,7 +140,7 @@ export function StaggerItem({
       className={className}
       style={{
         opacity: revealed ? 1 : 0,
-        transform: revealed ? "translate3d(0,0,0)" : `translate3d(0,${direction === "down" ? -dist : dist}px,0)`,
+        transform: getTransform(direction, dist, revealed),
         transition: `opacity 0.6s cubic-bezier(0.25,0.1,0.25,1), transform 0.6s cubic-bezier(0.25,0.1,0.25,1)`,
         willChange: "opacity, transform",
       }}

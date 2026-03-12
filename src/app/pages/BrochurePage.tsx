@@ -11,6 +11,12 @@ import {
   SubmitButton,
   ThankYouState,
 } from "../components/FormComponents";
+import {
+  CountryCodeSelector,
+  countryCodes,
+  isValidCountryDial,
+} from "../components/CountryCodeSelector";
+import type { CountryCode } from "../components/CountryCodeSelector";
 import { SEOHead, breadcrumbSchema } from "../components/SEOHead";
 import heroImg from "../../assets/brochure-hero.jpg";
 
@@ -61,9 +67,11 @@ type FormData = {
   acceptContact: boolean;
 };
 
-type FormErrors = Partial<Record<keyof FormData, string>>;
+type FormErrors = Partial<Record<keyof FormData, string>> & {
+  countryCode?: string;
+};
 
-function validateForm(data: FormData): FormErrors {
+function validateForm(data: FormData, countryDial: string): FormErrors {
   const errors: FormErrors = {};
   if (!data.firstName.trim()) errors.firstName = "First name is required";
   if (!data.lastName.trim()) errors.lastName = "Last name is required";
@@ -76,8 +84,10 @@ function validateForm(data: FormData): FormErrors {
     !data.linkedin.startsWith("in/")
   )
     errors.linkedin = "Please enter a valid LinkedIn URL or handle";
+  if (!isValidCountryDial(countryDial))
+    errors.countryCode = "Please select a valid country code";
   if (!data.whatsapp.trim()) errors.whatsapp = "WhatsApp number is required";
-  else if (!/^[\d\s\-+()]{7,}$/.test(data.whatsapp))
+  else if (!/^[\d\s\-()]{7,}$/.test(data.whatsapp))
     errors.whatsapp = "Please enter a valid phone number";
   if (!data.acceptContact) errors.acceptContact = "Please accept to continue";
   return errors;
@@ -94,13 +104,16 @@ export default function BrochurePage() {
     whatsapp: "",
     acceptContact: false,
   });
+  const [selectedCountry, setSelectedCountry] = useState<CountryCode>(
+    countryCodes[0] // UAE default
+  );
   const [errors, setErrors] = useState<FormErrors>({});
   const whatsappId = useId();
   const whatsappErrorId = `${whatsappId}-error`;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const errs = validateForm(form);
+    const errs = validateForm(form, selectedCountry.dial);
     setErrors(errs);
     if (Object.keys(errs).length > 0) return;
     setLoading(true);
@@ -140,7 +153,7 @@ export default function BrochurePage() {
             alt=""
             className="absolute inset-0 size-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[rgba(26,20,20,0.75)] via-[rgba(26,20,20,0.85)] to-[#1a1414]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[rgba(26,20,20,0.82)] via-[rgba(26,20,20,0.9)] to-[#1a1414]" />
         </div>
 
         <div className="relative z-10">
@@ -178,8 +191,8 @@ export default function BrochurePage() {
       </section>
 
       {/* Form + Sidebar */}
-      <section className="px-6 pb-16 md:pb-24" aria-label="Brochure request form and details">
-        <div className="max-w-[1100px] mx-auto flex flex-col lg:flex-row gap-12 lg:gap-16">
+      <section className="px-6 pb-10 md:pb-24" aria-label="Brochure request form and details">
+        <div className="max-w-[1100px] mx-auto flex flex-col lg:flex-row gap-8 lg:gap-16">
           {/* Form card */}
           <ScrollReveal direction="up" delay={0.1} className="flex-1 min-w-0">
             <div className="bg-[rgba(252,252,252,0.02)] rounded-[4px] border border-[rgba(255,255,255,0.1)] overflow-hidden">
@@ -215,14 +228,14 @@ export default function BrochurePage() {
                     <div className="flex flex-col sm:flex-row gap-4">
                       <InputField
                         label="First Name"
-                        placeholder="Cameron"
+                        placeholder="Alex"
                         value={form.firstName}
                         onChange={(v) => updateField("firstName", v)}
                         error={errors.firstName}
                       />
                       <InputField
                         label="Last Name"
-                        placeholder="Lee"
+                        placeholder="Morgan"
                         value={form.lastName}
                         onChange={(v) => updateField("lastName", v)}
                         error={errors.lastName}
@@ -230,7 +243,7 @@ export default function BrochurePage() {
                     </div>
                     <InputField
                       label="Email Address"
-                      placeholder="cameron@company.com"
+                      placeholder="alex@company.com"
                       value={form.email}
                       onChange={(v) => updateField("email", v)}
                       error={errors.email}
@@ -238,7 +251,7 @@ export default function BrochurePage() {
                     />
                     <InputField
                       label="LinkedIn Profile"
-                      placeholder="linkedin.com/in/cameronlee"
+                      placeholder="linkedin.com/in/alexmorgan"
                       value={form.linkedin}
                       onChange={(v) => updateField("linkedin", v)}
                       error={errors.linkedin}
@@ -252,13 +265,16 @@ export default function BrochurePage() {
                       >
                         WhatsApp Number
                       </label>
-                      <div className="flex w-full min-w-0">
-                        <div className="h-[45.5px] bg-[rgba(252,252,252,0.03)] border border-[rgba(129,106,84,0.4)] border-r-0 rounded-l-[2px] flex items-center gap-1.5 px-3 shrink-0">
-                          <span className="text-[13px]" aria-hidden="true">{"\uD83C\uDDE6\uD83C\uDDEA"}</span>
-                          <span className="font-['Inter',sans-serif] font-light text-[13px] text-[#8d8d8d]">
-                            +971
-                          </span>
-                        </div>
+                      <div className="flex w-full min-w-0 relative">
+                        <CountryCodeSelector
+                          selected={selectedCountry}
+                          onSelect={(c) => {
+                            setSelectedCountry(c);
+                            if (errors.countryCode)
+                              setErrors((p) => ({ ...p, countryCode: undefined }));
+                          }}
+                          error={!!errors.countryCode}
+                        />
                         <input
                           id={whatsappId}
                           type="tel"
@@ -276,6 +292,14 @@ export default function BrochurePage() {
                           } border-l-0 px-3 font-['Inter',sans-serif] font-light text-[13px] text-[#fcfcfc] placeholder:text-[rgba(252,252,252,0.35)] outline-none focus-visible:border-[#A08567] focus-visible:ring-1 focus-visible:ring-[#A08567] transition-colors`}
                         />
                       </div>
+                      {errors.countryCode && (
+                        <p
+                          role="alert"
+                          className="font-['Inter',sans-serif] font-light text-[12px] text-[#F87171]"
+                        >
+                          {errors.countryCode}
+                        </p>
+                      )}
                       {errors.whatsapp && (
                         <p
                           id={whatsappErrorId}
@@ -316,7 +340,7 @@ export default function BrochurePage() {
           </ScrollReveal>
 
           {/* Sidebar */}
-          <div className="w-full lg:w-[420px] shrink-0 flex flex-col gap-8">
+          <div className="w-full lg:w-[420px] shrink-0 flex flex-col gap-5 lg:gap-8">
             {/* Speakers image */}
             <ScrollReveal direction="right" delay={0.15}>
               <div className="relative overflow-hidden rounded-[4px] border border-[rgba(255,255,255,0.08)]">
@@ -336,12 +360,12 @@ export default function BrochurePage() {
             </ScrollReveal>
 
             <ScrollReveal direction="right" delay={0.2}>
-              <p className="font-['Inter',sans-serif] font-medium text-[12px] leading-[18px] tracking-[3px] uppercase text-[#A08567] mb-4">
+              <p className="font-['Inter',sans-serif] font-medium text-[12px] leading-[18px] tracking-[3px] uppercase text-[#A08567] mb-3">
                 What's Inside
               </p>
               <h2 className="font-['Cormorant_Garamond',serif] font-light text-[28px] md:text-[32px] leading-[39.6px] tracking-[-0.36px] text-[#fcfcfc]">
                 The full picture.
-                <span className="block font-['Cormorant_Garamond',serif] italic font-light text-[28px] md:text-[32px] leading-[39.6px] tracking-[-0.36px] text-[#A08567] mb-8">
+                <span className="block font-['Cormorant_Garamond',serif] italic font-light text-[28px] md:text-[32px] leading-[39.6px] tracking-[-0.36px] text-[#A08567] mb-1">
                   No gatekeeping.
                 </span>
               </h2>

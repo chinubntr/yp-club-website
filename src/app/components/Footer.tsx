@@ -62,6 +62,7 @@ export function Footer() {
           { label: "Brochure", href: "/brochure" },
         ]}
         legalLinks={[
+          { label: "Privacy Policy", href: "/privacy" },
           { label: "Cookies Policy", href: "/cookies" },
           { label: "Club Rules", href: "/club-rules" },
         ]}

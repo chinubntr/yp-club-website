@@ -1,5 +1,5 @@
 import { ScrollReveal, StaggerContainer, StaggerItem } from "./ScrollReveal";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import influenceImg from "../../assets/framework-influence.jpg";
 import knowledgeImg from "../../assets/framework-knowledge.jpg";
 import wealthImg from "../../assets/framework-wealth.jpg";
@@ -30,10 +30,13 @@ const pillars = [
 
 function PillarCard({
   pillar,
+  forceActive = false,
 }: {
   pillar: (typeof pillars)[0];
+  forceActive?: boolean;
 }) {
   const [hovered, setHovered] = useState(false);
+  const active = hovered || forceActive;
 
   return (
     <div
@@ -50,14 +53,14 @@ function PillarCard({
           alt={pillar.imageAlt}
           loading="lazy"
           className="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out"
-          style={{ transform: hovered ? "scale(1.05)" : "scale(1)" }}
+          style={{ transform: active ? "scale(1.05)" : "scale(1)" }}
         />
         {/* Gradient overlay from bottom */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#1a1414] via-[rgba(26,20,20,0.3)] to-transparent" />
         {/* Number overlay */}
         <span
           className="absolute bottom-4 left-6 font-['Cormorant_Garamond',serif] font-light text-[48px] leading-none transition-colors duration-500"
-          style={{ color: hovered ? "rgba(160,133,103,1)" : "rgba(160,133,103,0.6)" }}
+          style={{ color: active ? "rgba(160,133,103,1)" : "rgba(160,133,103,0.6)" }}
           aria-hidden="true"
         >
           {pillar.num}
@@ -69,23 +72,23 @@ function PillarCard({
         {/* Hover border glow */}
         <div
           className="absolute inset-0 border border-[rgba(160,133,103,0.25)] pointer-events-none transition-opacity duration-500"
-          style={{ opacity: hovered ? 1 : 0 }}
+          style={{ opacity: active ? 1 : 0 }}
         />
 
         <h3
           className="font-['Cormorant_Garamond',serif] font-normal text-[24px] md:text-[28px] leading-[1.3] text-[#fcfcfc] mb-3 transition-all duration-500"
-          style={{ transform: hovered ? "translateY(-2px)" : "translateY(0)" }}
+          style={{ transform: active ? "translateY(-2px)" : "translateY(0)" }}
         >
           {pillar.title}
         </h3>
 
-        {/* Body text: hidden by default, elegantly revealed on hover */}
+        {/* Body text: hidden by default, elegantly revealed on hover/in-view */}
         <div
           className="overflow-hidden transition-all duration-600 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
           style={{
-            maxHeight: hovered ? "160px" : "0px",
-            opacity: hovered ? 1 : 0,
-            marginTop: hovered ? "0px" : "-4px",
+            maxHeight: active ? "160px" : "0px",
+            opacity: active ? 1 : 0,
+            marginTop: active ? "0px" : "-4px",
           }}
         >
           <p className="font-['Inter',sans-serif] font-light text-[13px] leading-[22px] text-[rgba(252,252,252,0.8)]">
@@ -100,13 +103,57 @@ function PillarCard({
           <div
             className="h-px transition-all duration-600 ease-out"
             style={{
-              width: hovered ? "100%" : "40px",
-              background: hovered
+              width: active ? "100%" : "40px",
+              background: active
                 ? "linear-gradient(90deg, #A08567, rgba(160,133,103,0.2))"
                 : "rgba(255,255,255,0.1)",
             }}
           />
         </div>
+      </div>
+    </div>
+  );
+}
+
+function MobilePillarScroll() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    cardRefs.current.forEach((el, index) => {
+      if (!el) return;
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveIndex(index);
+          }
+        },
+        {
+          // Card must be at least 60% visible to become active
+          threshold: 0.6,
+        }
+      );
+      observer.observe(el);
+      observers.push(observer);
+    });
+
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
+  return (
+    <div className="md:hidden -mx-6 px-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory">
+      <div className="flex gap-3 w-max pb-2">
+        {pillars.map((pillar, index) => (
+          <div
+            key={pillar.num}
+            ref={(el) => { cardRefs.current[index] = el; }}
+            className="w-[85vw] max-w-[340px] shrink-0 snap-center"
+          >
+            <PillarCard pillar={pillar} forceActive={activeIndex === index} />
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -145,15 +192,7 @@ export function FrameworkSection() {
           ))}
         </StaggerContainer>
 
-        <div className="md:hidden -mx-6 px-6 overflow-x-auto scrollbar-hide">
-          <div className="flex gap-3 w-max pb-2">
-            {pillars.map((pillar) => (
-              <div key={pillar.num} className="w-[85vw] max-w-[340px] shrink-0">
-                <PillarCard pillar={pillar} />
-              </div>
-            ))}
-          </div>
-        </div>
+        <MobilePillarScroll />
       </div>
     </section>
   );

@@ -11,7 +11,7 @@ const processSteps = [
   {
     num: "01",
     title: "Download the YP Club App",
-    desc: "Your application starts in the app. Download it on iOS or Android and complete your founder profile, your company, your ambitions and why you\u2019re a fit.",
+    desc: "Your application starts in the app. Download it on iOS or Android and complete your founder profile, your company, your ambitions and tell us what you're building.",
   },
   {
     num: "02",
@@ -28,7 +28,7 @@ const processSteps = [
     title: "Decision & Onboarding",
     desc: "Approved founders receive access to the PioneerOS and their first curated dinner match. You\u2019ll understand immediately why the standard matters.",
   },
-];
+]
 
 export default function WaitlistPage() {
   const [videoOpen, setVideoOpen] = useState(false);

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { SubPageNav, PageFooter } from "../components/PageLayout";
 import { SEOHead, breadcrumbSchema } from "../components/SEOHead";
 import { ScrollReveal } from "../components/ScrollReveal";
@@ -68,10 +67,6 @@ const sections = [
 ];
 
 export default function PrivacyPolicyPage() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <div className="min-h-screen bg-[#1a1414] text-[#fcfcfc] overflow-x-hidden">
       <SEOHead
@@ -92,9 +87,7 @@ export default function PrivacyPolicyPage() {
           <h1 className="font-['Cormorant_Garamond',serif] font-light text-[32px] sm:text-[40px] md:text-[48px] leading-[1.1] text-[#fcfcfc] mb-4">
             Privacy Policy
           </h1>
-          <p className="font-['Inter',sans-serif] font-light text-[14px] leading-[24px] text-[#878787] mb-12">
-            Last updated: March 10, 2026
-          </p>
+          <div className="mb-12" />
         </ScrollReveal>
 
         <ScrollReveal direction="up" delay={0.1}>

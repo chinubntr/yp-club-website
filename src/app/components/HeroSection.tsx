@@ -8,7 +8,7 @@ const ease = [0.25, 0.1, 0.25, 1] as const;
 export function HeroSection() {
   return (
     <section
-      className="relative flex flex-col items-center justify-center overflow-hidden min-h-[calc(100svh-60px)] md:min-h-screen"
+      className="relative flex flex-col items-center justify-center overflow-hidden min-h-[calc(100svh-70px)] md:min-h-screen"
       aria-labelledby="hero-heading"
     >
       {/* Background image with overlay */}
@@ -55,7 +55,7 @@ export function HeroSection() {
         transition={{ duration: 1.2, delay: 1.4, ease }}
       />
 
-      <div className="relative max-w-[960px] mx-auto px-5 sm:px-6 text-center pt-24 md:pt-[140px]">
+      <div className="relative max-w-[960px] mx-auto px-6 text-center pt-24 md:pt-[140px]">
         {/* Label */}
         <motion.div
           className="flex items-center justify-center gap-3 mb-4 md:mb-6"
@@ -70,7 +70,7 @@ export function HeroSection() {
             transition={{ duration: 0.6, delay: 0.6, ease }}
             style={{ transformOrigin: "right" }}
           />
-          <p className="font-['Inter',sans-serif] font-medium text-[11px] md:text-[12px] leading-[16px] md:leading-[18px] tracking-[2.5px] md:tracking-[3px] uppercase text-[#A08567]">
+          <p className="font-['Inter',sans-serif] font-medium text-[12px] leading-[18px] tracking-[3px] uppercase text-[#A08567]">
             Private Founder Network in Dubai
           </p>
           <motion.div
@@ -86,10 +86,10 @@ export function HeroSection() {
         <div className="mb-5 md:mb-8">
           <h1
             id="hero-heading"
-            className="font-['Cormorant_Garamond',serif] font-light text-[clamp(24px,5vw,56px)] leading-[1.15] tracking-[-0.5px] md:tracking-[-1px] text-[#fcfcfc] text-center"
+            className="font-['Cormorant_Garamond',serif] font-light text-[32px] sm:text-[44px] md:text-[56px] leading-[1.1] sm:leading-[1.06] tracking-[-0.72px] text-[#fcfcfc] text-center"
           >
             <motion.span
-              className="block whitespace-nowrap"
+              className="block sm:whitespace-nowrap"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.4, ease }}
@@ -97,7 +97,7 @@ export function HeroSection() {
               The Operating System
             </motion.span>
             <motion.span
-              className="block whitespace-nowrap"
+              className="block sm:whitespace-nowrap"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.55, ease }}
@@ -105,7 +105,7 @@ export function HeroSection() {
               for Founders Who Are
             </motion.span>
             <motion.span
-              className="block whitespace-nowrap italic text-[#A08567]"
+              className="block sm:whitespace-nowrap italic text-[#A08567]"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.7, ease }}
@@ -117,7 +117,7 @@ export function HeroSection() {
 
         {/* Subtext */}
         <motion.p
-          className="font-['Inter',sans-serif] font-light text-[14px] md:text-[15px] leading-[22px] md:leading-[24px] text-[#d4d4d4] max-w-[500px] mx-auto mb-7 md:mb-10"
+          className="font-['Inter',sans-serif] font-light text-[14px] leading-[24px] text-[#d4d4d4] max-w-[500px] mx-auto mb-7 md:mb-10"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.9, ease }}

@@ -1,10 +1,44 @@
+import { useRef, useEffect, useState } from "react";
 import { ScrollReveal } from "./ScrollReveal";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import imgDubaiCityscape from "figma:asset/ba357afb0bb8e25a9df8273764c772d1c7ac9942.png";
 
 export function VisualBreather() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [offsetY, setOffsetY] = useState(0);
+
+  useEffect(() => {
+    // Only run JS parallax on mobile (md breakpoint = 768px)
+    const mq = window.matchMedia("(max-width: 767px)");
+    if (!mq.matches) return;
+
+    let ticking = false;
+    let rafId = 0;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      rafId = requestAnimationFrame(() => {
+        if (sectionRef.current) {
+          const rect = sectionRef.current.getBoundingClientRect();
+          const viewH = window.innerHeight;
+          const progress = (viewH - rect.top) / (viewH + rect.height);
+          setOffsetY((progress - 0.5) * 60);
+        }
+        ticking = false;
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       className="relative h-[50vh] md:h-[60vh] overflow-hidden flex items-center justify-center"
       aria-label="Where ambition meets infrastructure"
     >
@@ -18,13 +52,14 @@ export function VisualBreather() {
           backgroundSize: "cover",
         }}
       />
-      {/* Mobile: ImageWithFallback fallback (background-attachment: fixed doesn't work on iOS) */}
-      <div className="absolute inset-0 md:hidden">
+      {/* Mobile: JS-driven parallax (background-attachment: fixed doesn't work on iOS) */}
+      <div className="absolute -top-[30px] -bottom-[30px] left-0 right-0 md:hidden">
         <ImageWithFallback
           src={imgDubaiCityscape}
           alt="Dubai night skyline with Burj Khalifa"
           loading="lazy"
-          className="absolute inset-0 size-full object-cover"
+          className="absolute inset-0 size-full object-cover will-change-transform"
+          style={{ transform: `translateY(${offsetY}px)` }}
         />
       </div>
 
